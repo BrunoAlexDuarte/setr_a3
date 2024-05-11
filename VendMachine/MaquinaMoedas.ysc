@@ -14,7 +14,7 @@
         <outgoingTransitions xmi:id="_dcujYA0cEe-HU8-mtK9I3A" specification="but.B4&#xA;[Choice!=0 &amp;&amp; Balance&lt;Choice]" target="_0sZqEAyPEe-2qor_ukDidg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_jnx9YAyNEe-2qor_ukDidg" specification="" name="ProductExpeled" incomingTransitions="_qeatgA0bEe-HU8-mtK9I3A">
-        <outgoingTransitions xmi:id="__-QTMA0bEe-HU8-mtK9I3A" specification="but.B4[Balance>0]&#xA;/Choice=0" target="_AK0VgAyNEe-2qor_ukDidg"/>
+        <outgoingTransitions xmi:id="__-QTMA0bEe-HU8-mtK9I3A" specification="but.B4[Balance>0]&#xA;/Choice=0;changeLed(Choice)" target="_AK0VgAyNEe-2qor_ukDidg"/>
         <outgoingTransitions xmi:id="_koip0A0cEe-HU8-mtK9I3A" specification="but.B4[Balance==0]/Choice=0" target="_mJtcsAyPEe-2qor_ukDidg"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_mJtcsAyPEe-2qor_ukDidg" name="Insert" incomingTransitions="_keeXkA0LEe-fu5ySDaCXSg _2TWHYA0LEe-fu5ySDaCXSg _NNJwsA0MEe-fu5ySDaCXSg _S9BdkA0MEe-fu5ySDaCXSg _TnfjoA0cEe-HU8-mtK9I3A _koip0A0cEe-HU8-mtK9I3A _9v5IwA0cEe-HU8-mtK9I3A">
@@ -234,7 +234,7 @@
     <edges xmi:id="__-Q6QA0bEe-HU8-mtK9I3A" type="Transition" element="__-QTMA0bEe-HU8-mtK9I3A" source="_jnzLgAyNEe-2qor_ukDidg" target="_AK2KsAyNEe-2qor_ukDidg">
       <children xsi:type="notation:DecorationNode" xmi:id="__-RhUQ0bEe-HU8-mtK9I3A" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="__-RhUg0bEe-HU8-mtK9I3A"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="__-RhUw0bEe-HU8-mtK9I3A" x="9" y="-68"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="__-RhUw0bEe-HU8-mtK9I3A" x="1" y="-102"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="__-Q6QQ0bEe-HU8-mtK9I3A" routing="Rectilinear" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="__-RhUA0bEe-HU8-mtK9I3A" fontName="Verdana"/>
