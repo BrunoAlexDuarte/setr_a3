@@ -35,22 +35,45 @@ K_THREAD_STACK_DEFINE(ui_thread_stack_area, STACK_SIZE);
 
 Statechart StateMachine; // The statemachine structure variable 
 
+void show_insert(uint32_t action) {
+	//ACTION is 1 if coint of 1, and 2 if coin of 2
+	printf("You inserted a coin of %d€!\n", action);
+	//GET SALDO
+	uint32_t balance = 0; //TODO
+	printf("You now have %d balance!\n", balance);
+}
+
+void show_new_option() {
+
+	uint32_t option = 0;
+	
+	if (option == 0) {
+			uint32_t balance = 0; //TODO
+			printf("Your selected option is to return all your insert coins, which amount to %d\n", balance);
+	} else if (option < 4) {
+			printf("Your selected option is %d, which costs %d€\n");
+	}
+}
+
 /* Define the callback functions */
 void but0_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
         statechart_but_raise_b1(&StateMachine);
+	show_insert(1);
         return;
 }
 
 void but1_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
         statechart_but_raise_b2(&StateMachine);
+	show_insert(2);
 	return;
 }
 
 void but2_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
         statechart_but_raise_b3(&StateMachine);
+	show_new_option();
 	return;
 }
 
