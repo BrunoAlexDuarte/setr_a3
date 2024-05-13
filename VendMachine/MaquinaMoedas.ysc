@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_0n4lMAyJEe-Tv_amLlFKAQ" specification="// Use the event driven execution model.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'.&#xA;@EventDriven&#xA;&#xA;// Use @SuperSteps(yes) to enable&#xA;// super step semantics.&#xA;@SuperSteps(no)&#xA;&#xA;//interface:&#xA;&#x9;// Define events and variables here. &#xA;&#x9;// Use CTRL + Space for content assist.&#xA;&#x9;//in event myEvent&#xA;&#x9;&#xA;interface light:&#xA;&#x9;var L1:boolean&#xA;&#x9;var L2:boolean&#xA;&#x9;var L3:boolean&#xA;&#x9;var L4:boolean&#xA;&#x9;&#xA;interface but:&#xA;&#x9;in event B1&#xA;&#x9;in event B2&#xA;&#x9;in event B3&#xA;&#x9;in event B4&#xA;&#x9;&#xA;interface:&#xA;&#x9;operation changeLed(id:integer)&#xA;&#x9;operation showBalance(balance:integer)&#xA;&#x9;operation showChoice(choice:integer)&#xA;&#x9;&#xA;internal:&#xA;&#x9;var Balance: integer&#xA;&#x9;var Choice: integer&#xA;&#x9;&#xA;" name="Statechart">
+  <sgraph:Statechart xmi:id="_0n4lMAyJEe-Tv_amLlFKAQ" specification="// Use the event driven execution model.&#xA;// Switch to cycle based behavior&#xA;// by specifying '@CycleBased(200)'.&#xA;@EventDriven&#xA;&#xA;// Use @SuperSteps(yes) to enable&#xA;// super step semantics.&#xA;@SuperSteps(no)&#xA;&#xA;//interface:&#xA;&#x9;// Define events and variables here. &#xA;&#x9;// Use CTRL + Space for content assist.&#xA;&#x9;//in event myEvent&#xA;&#x9;&#xA;interface light:&#xA;&#x9;var L1:boolean&#xA;&#x9;var L2:boolean&#xA;&#x9;var L3:boolean&#xA;&#x9;var L4:boolean&#xA;&#x9;&#xA;interface but:&#xA;&#x9;in event B1&#xA;&#x9;in event B2&#xA;&#x9;in event B3&#xA;&#x9;in event B4&#xA;&#x9;&#xA;interface:&#xA;&#x9;operation changeLed(id:integer)&#xA;&#x9;operation showState(balance:integer)&#xA;&#x9;&#xA;internal:&#xA;&#x9;var Balance: integer&#xA;&#x9;var Choice: integer&#xA;&#x9;&#xA;" name="Statechart">
     <regions xmi:id="_0n8PkwyJEe-Tv_amLlFKAQ" name="a">
       <vertices xsi:type="sgraph:Entry" xmi:id="_0n8PlAyJEe-Tv_amLlFKAQ">
         <outgoingTransitions xmi:id="_TnfjoA0cEe-HU8-mtK9I3A" specification="/Choice=0;Balance=0;changeLed(Choice)" target="_mJtcsAyPEe-2qor_ukDidg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_AK0VgAyNEe-2qor_ukDidg" specification="entry/showChoice(Choice)" name="Browse" incomingTransitions="_atMDsA0LEe-fu5ySDaCXSg _FQzTQA0OEe-C6MWmgXAQqg __-QTMA0bEe-HU8-mtK9I3A _HNpcoA0dEe-HU8-mtK9I3A">
+      <vertices xsi:type="sgraph:State" xmi:id="_AK0VgAyNEe-2qor_ukDidg" specification="entry/showState(1)" name="Browse" incomingTransitions="_atMDsA0LEe-fu5ySDaCXSg _FQzTQA0OEe-C6MWmgXAQqg __-QTMA0bEe-HU8-mtK9I3A _HNpcoA0dEe-HU8-mtK9I3A">
         <outgoingTransitions xmi:id="_keeXkA0LEe-fu5ySDaCXSg" specification="but.B1/Balance+=1" target="_mJtcsAyPEe-2qor_ukDidg"/>
         <outgoingTransitions xmi:id="_2TWHYA0LEe-fu5ySDaCXSg" specification="but.B2/Balance+=2" target="_mJtcsAyPEe-2qor_ukDidg"/>
         <outgoingTransitions xmi:id="_n72ygA0NEe-C6MWmgXAQqg" specification="but.B4[Choice==0]/Balance=0" target="_k4iLcA0NEe-C6MWmgXAQqg"/>
@@ -13,19 +13,19 @@
         <outgoingTransitions xmi:id="_qeatgA0bEe-HU8-mtK9I3A" specification="but.B4&#xA;[ Choice != 0 &amp;&amp;&#xA;&#x9;Balance>=Choice]&#xA;/Balance-=Choice" target="_jnx9YAyNEe-2qor_ukDidg"/>
         <outgoingTransitions xmi:id="_dcujYA0cEe-HU8-mtK9I3A" specification="but.B4&#xA;[Choice!=0 &amp;&amp; Balance&lt;Choice]" target="_0sZqEAyPEe-2qor_ukDidg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_jnx9YAyNEe-2qor_ukDidg" specification="" name="ProductExpeled" incomingTransitions="_qeatgA0bEe-HU8-mtK9I3A">
+      <vertices xsi:type="sgraph:State" xmi:id="_jnx9YAyNEe-2qor_ukDidg" specification="entry/showState(3)" name="ProductExpeled" incomingTransitions="_qeatgA0bEe-HU8-mtK9I3A">
         <outgoingTransitions xmi:id="__-QTMA0bEe-HU8-mtK9I3A" specification="but.B4[Balance>0]&#xA;/Choice=0;changeLed(Choice)" target="_AK0VgAyNEe-2qor_ukDidg"/>
         <outgoingTransitions xmi:id="_koip0A0cEe-HU8-mtK9I3A" specification="but.B4[Balance==0]/Choice=0" target="_mJtcsAyPEe-2qor_ukDidg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_mJtcsAyPEe-2qor_ukDidg" specification="entry/showBalance(Balance)" name="Insert" incomingTransitions="_keeXkA0LEe-fu5ySDaCXSg _2TWHYA0LEe-fu5ySDaCXSg _NNJwsA0MEe-fu5ySDaCXSg _S9BdkA0MEe-fu5ySDaCXSg _TnfjoA0cEe-HU8-mtK9I3A _koip0A0cEe-HU8-mtK9I3A _9v5IwA0cEe-HU8-mtK9I3A">
+      <vertices xsi:type="sgraph:State" xmi:id="_mJtcsAyPEe-2qor_ukDidg" specification="entry/showState(0)" name="Insert" incomingTransitions="_keeXkA0LEe-fu5ySDaCXSg _2TWHYA0LEe-fu5ySDaCXSg _NNJwsA0MEe-fu5ySDaCXSg _S9BdkA0MEe-fu5ySDaCXSg _TnfjoA0cEe-HU8-mtK9I3A _koip0A0cEe-HU8-mtK9I3A _9v5IwA0cEe-HU8-mtK9I3A">
         <outgoingTransitions xmi:id="_atMDsA0LEe-fu5ySDaCXSg" specification="but.B3" target="_AK0VgAyNEe-2qor_ukDidg"/>
         <outgoingTransitions xmi:id="_NNJwsA0MEe-fu5ySDaCXSg" specification="but.B1&#xA;/Balance+=1" target="_mJtcsAyPEe-2qor_ukDidg"/>
         <outgoingTransitions xmi:id="_S9BdkA0MEe-fu5ySDaCXSg" specification="but.B2&#xA;/Balance+=2" target="_mJtcsAyPEe-2qor_ukDidg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_0sZqEAyPEe-2qor_ukDidg" name="Error" incomingTransitions="_dcujYA0cEe-HU8-mtK9I3A">
+      <vertices xsi:type="sgraph:State" xmi:id="_0sZqEAyPEe-2qor_ukDidg" specification="entry/showState(4)" name="Error" incomingTransitions="_dcujYA0cEe-HU8-mtK9I3A">
         <outgoingTransitions xmi:id="_HNpcoA0dEe-HU8-mtK9I3A" specification="but.B4" target="_AK0VgAyNEe-2qor_ukDidg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_k4iLcA0NEe-C6MWmgXAQqg" name="ChangeExpeled" incomingTransitions="_n72ygA0NEe-C6MWmgXAQqg">
+      <vertices xsi:type="sgraph:State" xmi:id="_k4iLcA0NEe-C6MWmgXAQqg" specification="entry/showState(2)" name="ChangeExpeled" incomingTransitions="_n72ygA0NEe-C6MWmgXAQqg">
         <outgoingTransitions xmi:id="_9v5IwA0cEe-HU8-mtK9I3A" specification="but.B4/Choice=0" target="_mJtcsAyPEe-2qor_ukDidg"/>
       </vertices>
     </regions>
