@@ -1,3 +1,17 @@
+/** @file  main.c
+ * @brief Main file that connects the SM to the Nordic board
+ *
+ * Also has the declaration of the callbacks for the LED in the nordic boards, 
+ * the operations associated with the SM, and all sorts of other associated
+ * functions needed
+ *
+ * @author Bruno Duarte 118326
+ * @author Diogo Lapa 117296
+ * @date 14-05-2024
+ *
+ */
+
+
 /* Includes. Add according to the resources used  */
 #include <zephyr/kernel.h>          /* for k_msleep() */
 #include <zephyr/device.h>          /* for device_is_ready() and device structure */
@@ -32,24 +46,65 @@ static const struct gpio_dt_spec but_3 = GPIO_DT_SPEC_GET(BUT3_NODE, gpios);
 Statechart StateMachine; // State machine structure variable 
 
 /* Define callback functions */
+
+/** @brief Callback function for button 0
+ *  
+ *  Callback function called when we press button 0, sends the signal to the SM so it can
+ *  activate the associated event
+ *
+ * @param[in] dev pointer to struct device
+ * @param[in] cb pointer to struct gpio_callback
+ * @param[in] pins integer for the pin associated with button 0
+ *
+ */
 void but0_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
     statechart_but_raise_b1(&StateMachine);
     return;
 }
 
+/** @brief Callback function for button 1
+ *  
+ *  Callback function called when we press button 1, sends the signal to the SM so it can
+ *  activate the associated event
+ *
+ * @param[in] dev pointer to struct device
+ * @param[in] cb pointer to struct gpio_callback
+ * @param[in] pins integer for the pin associated with button 1
+ *
+ */
 void but1_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
     statechart_but_raise_b2(&StateMachine);
 	return;
 }
 
+/** @brief Callback function for button 2
+ *  
+ *  Callback function called when we press button 2, sends the signal to the SM so it can
+ *  activate the associated event
+ *
+ * @param[in] dev pointer to struct device
+ * @param[in] cb pointer to struct gpio_callback
+ * @param[in] pins integer for the pin associated with button 2
+ *
+ */
 void but2_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
     statechart_but_raise_b3(&StateMachine);
 	return;
 }
 
+/** @brief Callback function for button 3
+ *  
+ *  Callback function called when we press button 3, sends the signal to the SM so it can
+ *  activate the associated event
+ *
+ * @param[in] dev pointer to struct device
+ * @param[in] cb pointer to struct gpio_callback
+ * @param[in] pins integer for the pin associated with button 3
+ *
+ */
 void but3_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
     statechart_but_raise_b4(&StateMachine);
