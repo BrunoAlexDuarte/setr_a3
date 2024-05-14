@@ -16,6 +16,7 @@ This header defines prototypes for all functions that are required by the state 
 
 This state machine makes use of operations declared in the state machines interface or internal scopes. Thus the function prototypes:
 - statechart_changeLed
+- statechart_showState
 are defined.
 
 These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
@@ -25,8 +26,8 @@ There are some constraints that have to be considered for the implementation of 
 
 */
 
-
 extern void statechart_changeLed( Statechart* handle, const sc_integer id);
+extern void statechart_showState( Statechart* handle, const sc_integer state);
 
 
 

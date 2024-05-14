@@ -13,11 +13,6 @@ extern "C" {
 typedef struct Statechart Statechart;
 
 /*!
-* Forward declaration of the data structure for the StatechartIfaceLight interface scope.
-*/
-typedef struct StatechartIfaceLight StatechartIfaceLight;
-
-/*!
 * Forward declaration of the data structure for the StatechartIfaceBut interface scope.
 */
 typedef struct StatechartIfaceBut StatechartIfaceBut;
@@ -106,17 +101,6 @@ typedef enum
 } StatechartStates;
 
 
-/*! Type declaration of the data structure for the StatechartIfaceLight interface scope. */
-struct StatechartIfaceLight
-{
-	sc_boolean L1;
-	sc_boolean L2;
-	sc_boolean L3;
-	sc_boolean L4;
-};
-
-
-
 /*! Type declaration of the data structure for the StatechartIfaceBut interface scope. */
 struct StatechartIfaceBut
 {
@@ -149,7 +133,6 @@ struct StatechartInternal
 struct Statechart
 {
 	StatechartStates stateConfVector[STATECHART_MAX_ORTHOGONAL_STATES];
-	StatechartIfaceLight ifaceLight;
 	StatechartIfaceBut ifaceBut;
 	StatechartInternal internal;
 	sc_boolean isExecuting;
@@ -176,22 +159,6 @@ extern void statechart_trigger_without_event(Statechart* handle);
 
 
 
-/*! Gets the value of the variable 'L1' that is defined in the interface scope 'light'. */ 
-extern sc_boolean statechart_light_get_l1(const Statechart* handle);
-/*! Sets the value of the variable 'L1' that is defined in the interface scope 'light'. */ 
-extern void statechart_light_set_l1(Statechart* handle, sc_boolean value);
-/*! Gets the value of the variable 'L2' that is defined in the interface scope 'light'. */ 
-extern sc_boolean statechart_light_get_l2(const Statechart* handle);
-/*! Sets the value of the variable 'L2' that is defined in the interface scope 'light'. */ 
-extern void statechart_light_set_l2(Statechart* handle, sc_boolean value);
-/*! Gets the value of the variable 'L3' that is defined in the interface scope 'light'. */ 
-extern sc_boolean statechart_light_get_l3(const Statechart* handle);
-/*! Sets the value of the variable 'L3' that is defined in the interface scope 'light'. */ 
-extern void statechart_light_set_l3(Statechart* handle, sc_boolean value);
-/*! Gets the value of the variable 'L4' that is defined in the interface scope 'light'. */ 
-extern sc_boolean statechart_light_get_l4(const Statechart* handle);
-/*! Sets the value of the variable 'L4' that is defined in the interface scope 'light'. */ 
-extern void statechart_light_set_l4(Statechart* handle, sc_boolean value);
 /*! Raises the in event 'B1' that is defined in the interface scope 'but'. */ 
 extern void statechart_but_raise_b1(Statechart* handle);
 /*! Raises the in event 'B2' that is defined in the interface scope 'but'. */ 

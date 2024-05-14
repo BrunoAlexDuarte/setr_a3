@@ -15,6 +15,11 @@ Implementation of the state machine 'Statechart'
 #endif
 
 /* prototypes of all internal functions */
+static void enact_a_Browse(Statechart* handle);
+static void enact_a_ProductExpeled(Statechart* handle);
+static void enact_a_Insert(Statechart* handle);
+static void enact_a_Error(Statechart* handle);
+static void enact_a_ChangeExpeled(Statechart* handle);
 static void enseq_a_Browse_default(Statechart* handle);
 static void enseq_a_ProductExpeled_default(Statechart* handle);
 static void enseq_a_Insert_default(Statechart* handle);
@@ -89,10 +94,6 @@ void statechart_init(Statechart* handle)
 	
 	
 	/* Default init sequence for statechart Statechart */
-	statechart_light_set_l1(handle, bool_false);
-	statechart_light_set_l2(handle, bool_false);
-	statechart_light_set_l3(handle, bool_false);
-	statechart_light_set_l4(handle, bool_false);
 	statechart_internal_set_balance(handle, 0);
 	statechart_internal_set_choice(handle, 0);
 	
@@ -249,40 +250,6 @@ static void run_cycle(Statechart* handle)
 }
 
 
-
-
-sc_boolean statechart_light_get_l1(const Statechart* handle)
-{
-	return handle->ifaceLight.L1;
-}
-void statechart_light_set_l1(Statechart* handle, sc_boolean value)
-{
-	handle->ifaceLight.L1 = value;
-}
-sc_boolean statechart_light_get_l2(const Statechart* handle)
-{
-	return handle->ifaceLight.L2;
-}
-void statechart_light_set_l2(Statechart* handle, sc_boolean value)
-{
-	handle->ifaceLight.L2 = value;
-}
-sc_boolean statechart_light_get_l3(const Statechart* handle)
-{
-	return handle->ifaceLight.L3;
-}
-void statechart_light_set_l3(Statechart* handle, sc_boolean value)
-{
-	handle->ifaceLight.L3 = value;
-}
-sc_boolean statechart_light_get_l4(const Statechart* handle)
-{
-	return handle->ifaceLight.L4;
-}
-void statechart_light_set_l4(Statechart* handle, sc_boolean value)
-{
-	handle->ifaceLight.L4 = value;
-}
 void statechart_but_raise_b1(Statechart* handle)
 {
 	statechart_add_event_to_queue(&(handle->in_event_queue), Statechart_but_B1);
@@ -324,10 +291,46 @@ static void statechart_internal_set_choice(Statechart* handle, sc_integer value)
 
 /* implementations of all internal functions */
 
+/* Entry action for state 'Browse'. */
+static void enact_a_Browse(Statechart* handle)
+{
+	/* Entry action for state 'Browse'. */
+	statechart_showState(handle,1);
+}
+
+/* Entry action for state 'ProductExpeled'. */
+static void enact_a_ProductExpeled(Statechart* handle)
+{
+	/* Entry action for state 'ProductExpeled'. */
+	statechart_showState(handle,3);
+}
+
+/* Entry action for state 'Insert'. */
+static void enact_a_Insert(Statechart* handle)
+{
+	/* Entry action for state 'Insert'. */
+	statechart_showState(handle,0);
+}
+
+/* Entry action for state 'Error'. */
+static void enact_a_Error(Statechart* handle)
+{
+	/* Entry action for state 'Error'. */
+	statechart_showState(handle,4);
+}
+
+/* Entry action for state 'ChangeExpeled'. */
+static void enact_a_ChangeExpeled(Statechart* handle)
+{
+	/* Entry action for state 'ChangeExpeled'. */
+	statechart_showState(handle,2);
+}
+
 /* 'default' enter sequence for state Browse */
 static void enseq_a_Browse_default(Statechart* handle)
 {
 	/* 'default' enter sequence for state Browse */
+	enact_a_Browse(handle);
 	handle->stateConfVector[0] = Statechart_a_Browse;
 }
 
@@ -335,6 +338,7 @@ static void enseq_a_Browse_default(Statechart* handle)
 static void enseq_a_ProductExpeled_default(Statechart* handle)
 {
 	/* 'default' enter sequence for state ProductExpeled */
+	enact_a_ProductExpeled(handle);
 	handle->stateConfVector[0] = Statechart_a_ProductExpeled;
 }
 
@@ -342,6 +346,7 @@ static void enseq_a_ProductExpeled_default(Statechart* handle)
 static void enseq_a_Insert_default(Statechart* handle)
 {
 	/* 'default' enter sequence for state Insert */
+	enact_a_Insert(handle);
 	handle->stateConfVector[0] = Statechart_a_Insert;
 }
 
@@ -349,6 +354,7 @@ static void enseq_a_Insert_default(Statechart* handle)
 static void enseq_a_Error_default(Statechart* handle)
 {
 	/* 'default' enter sequence for state Error */
+	enact_a_Error(handle);
 	handle->stateConfVector[0] = Statechart_a_Error;
 }
 
@@ -356,6 +362,7 @@ static void enseq_a_Error_default(Statechart* handle)
 static void enseq_a_ChangeExpeled_default(Statechart* handle)
 {
 	/* 'default' enter sequence for state ChangeExpeled */
+	enact_a_ChangeExpeled(handle);
 	handle->stateConfVector[0] = Statechart_a_ChangeExpeled;
 }
 
@@ -481,7 +488,7 @@ static sc_integer a_Browse_react(Statechart* handle, const sc_integer transition
 				transitioned_after = 0;
 			}  else
 			{
-				if (((handle->ifaceBut.B4_raised) == bool_true) && (((handle->internal.Choice) == (0)) == bool_true))
+				if (((handle->ifaceBut.B4_raised) == bool_true) && ((((handle->internal.Choice) == (0)) && ((handle->internal.Balance) > (0))) == bool_true))
 				{ 
 					exseq_a_Browse(handle);
 					statechart_internal_set_balance(handle, 0);
@@ -541,6 +548,7 @@ static sc_integer a_ProductExpeled_react(Statechart* handle, const sc_integer tr
 		{ 
 			exseq_a_ProductExpeled(handle);
 			statechart_internal_set_choice(handle, 0);
+			statechart_changeLed(handle,handle->internal.Choice);
 			enseq_a_Browse_default(handle);
 			react(handle,0);
 			transitioned_after = 0;
