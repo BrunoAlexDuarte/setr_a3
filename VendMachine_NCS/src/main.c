@@ -199,22 +199,23 @@ int main(void)
  * Implementation of external functions called by the StateMachine
  * ********************************************************************/
 
-/** @brief Function that changes the LEDs
+/**
+ * @brief Changes the state of LEDs based on the provided ID.
  *
- * This function is the implementation of the operation changeLed() defined in the SM.
- * We receive the id that is either the product we have selected or the state we are,
- * this state can be either 4 if we expelled the product or 5 if we expelled the change.
- * It is 1..3 if we want to change the sellected product.
- * If the id is 4 or 5 it does not change the option LED's. But sending id=0(choice to
- * retrieve change) will also turn of the changes in the LED's made by id=4 or id=5 (turn of
- * LED3 and LED4)
+ * This function adjusts the LED states based on the provided ID, 
+ * which corresponds to specific LED configurations.
  *
- * @author Diogo Lapa
- * @param[in] handle Is the pointer to the state chart of the SM
- * @param[in] id Is the identifier of the choice/state whose message we want to send
- *
- * @date 14-05-2024
- *
+ * ID Interpretation:
+ *   - Case 0: Turns off all LEDs.
+ *   - Case 1: Indicates selection of product 1.
+ *   - Case 2: Indicates selection of product 2.
+ *   - Case 3: Indicates selection of product 3.
+ *   - Case 4: Indicates the desired product was expelled.
+ *   - Case 5: Indicates balance was expelled.
+ * 
+ * @param[in] handle Pointer to the Statechart instance.
+ * @param[in] id The ID indicating which LED state to change.
+ * 
  */
 void statechart_changeLed(Statechart* handle, const sc_integer id) {
     switch (id) {
@@ -247,17 +248,21 @@ void statechart_changeLed(Statechart* handle, const sc_integer id) {
     }
 }
 
-/** @brief Function that shows the message of the state in the terminal
+/**
+ * @brief Displays the current state of the state machine.
  *
- * This function is the implementation of the operation showState() defined in the SM.
- * We receive an id associated with each state and send the message associated with that state
+ * This function clears the terminal and prints information based on the provided state:
+ *   - If state is 0 (Insert), it prints the current balance.
+ *   - If state is 1 (Browse), it prints the selected product.
+ *   - If state is 2 (ChangeExpeled), it prints a message indicating a change was expelled.
+ *   - If state is 3 (ProductExpeled), it prints a message indicating a product was expelled
+ *     along with the new balance.
+ *   - If state is 4 (Error), it prints an error message indicating insufficient balance
+ *     for the selected product, along with current balance and required balance.
  *
- * @author Diogo Lapa
- * @param[in] handle Is the pointer to the state chart of the SM
- * @param[in] id Is the identifier of the state whose message we want to send
- *
- * @date 14-05-2024
- *
+ * @param[in] handle Pointer to the Statechart instance.
+ * @param[in] state The current state of the state machine.
+ * 
  */
 void statechart_showState(Statechart* handle, const sc_integer state) {
 	printf("\e[1;1H\e[2J"); // Clear terminal
