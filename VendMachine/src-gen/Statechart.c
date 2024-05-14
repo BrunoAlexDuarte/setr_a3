@@ -492,6 +492,7 @@ static sc_integer a_Browse_react(Statechart* handle, const sc_integer transition
 				{ 
 					exseq_a_Browse(handle);
 					statechart_internal_set_balance(handle, 0);
+					statechart_changeLed(handle,5);
 					enseq_a_ChangeExpeled_default(handle);
 					react(handle,0);
 					transitioned_after = 0;
@@ -511,6 +512,7 @@ static sc_integer a_Browse_react(Statechart* handle, const sc_integer transition
 						{ 
 							exseq_a_Browse(handle);
 							statechart_internal_set_balance(handle, handle->internal.Balance - handle->internal.Choice);
+							statechart_changeLed(handle,4);
 							enseq_a_ProductExpeled_default(handle);
 							react(handle,0);
 							transitioned_after = 0;
@@ -558,6 +560,7 @@ static sc_integer a_ProductExpeled_react(Statechart* handle, const sc_integer tr
 			{ 
 				exseq_a_ProductExpeled(handle);
 				statechart_internal_set_choice(handle, 0);
+				statechart_changeLed(handle,handle->internal.Choice);
 				enseq_a_Insert_default(handle);
 				react(handle,0);
 				transitioned_after = 0;
@@ -649,6 +652,7 @@ static sc_integer a_ChangeExpeled_react(Statechart* handle, const sc_integer tra
 		{ 
 			exseq_a_ChangeExpeled(handle);
 			statechart_internal_set_choice(handle, 0);
+			statechart_changeLed(handle,handle->internal.Choice);
 			enseq_a_Insert_default(handle);
 			react(handle,0);
 			transitioned_after = 0;

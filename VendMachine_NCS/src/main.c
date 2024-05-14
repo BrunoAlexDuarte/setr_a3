@@ -12,6 +12,8 @@
 /* Get led 0-1 and button 0-3 node IDs. Refer to the DTS file */
 #define LED0_NODE DT_ALIAS(led0)
 #define LED1_NODE DT_ALIAS(led1)
+#define LED2_NODE DT_ALIAS(led2)
+#define LED3_NODE DT_ALIAS(led3)
 #define BUT0_NODE DT_ALIAS(sw0)
 #define BUT1_NODE DT_ALIAS(sw1)
 #define BUT2_NODE DT_ALIAS(sw2)
@@ -20,6 +22,8 @@
 /* Get the device pointer, pin number, and configuration flags for led 0-1 and button 0-3. A build error on this line means your board is unsupported. */
 static const struct gpio_dt_spec led_0 = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 static const struct gpio_dt_spec led_1 = GPIO_DT_SPEC_GET(LED1_NODE, gpios);
+static const struct gpio_dt_spec led_2 = GPIO_DT_SPEC_GET(LED2_NODE, gpios);
+static const struct gpio_dt_spec led_3 = GPIO_DT_SPEC_GET(LED3_NODE, gpios);
 static const struct gpio_dt_spec but_0 = GPIO_DT_SPEC_GET(BUT0_NODE, gpios);
 static const struct gpio_dt_spec but_1 = GPIO_DT_SPEC_GET(BUT1_NODE, gpios);
 static const struct gpio_dt_spec but_2 = GPIO_DT_SPEC_GET(BUT2_NODE, gpios);
@@ -67,6 +71,7 @@ int main(void)
 
 	/* Check if devices are ready */
 	if(!device_is_ready(led_0.port) || !device_is_ready(led_1.port) ||
+		!device_is_ready(led_2.port) || !device_is_ready(led_3.port) ||
         !device_is_ready(but_0.port) || !device_is_ready(but_1.port) ||
         !device_is_ready(but_2.port) || !device_is_ready(but_3.port)) {
 
@@ -82,6 +87,14 @@ int main(void)
 		return 0;
 	}
     ret = gpio_pin_configure_dt(&led_1, GPIO_OUTPUT_INACTIVE);
+	if(ret < 0) {
+		return 0;
+	}
+	ret = gpio_pin_configure_dt(&led_2, GPIO_OUTPUT_INACTIVE);
+	if(ret < 0) {
+		return 0;
+	}
+    ret = gpio_pin_configure_dt(&led_3, GPIO_OUTPUT_INACTIVE);
 	if(ret < 0) {
 		return 0;
 	}
@@ -136,6 +149,8 @@ void statechart_changeLed(Statechart* handle, const sc_integer id) {
         case 0:
             gpio_pin_set_dt(&led_0, 0);
             gpio_pin_set_dt(&led_1, 0);
+			gpio_pin_set_dt(&led_2, 0);
+			gpio_pin_set_dt(&led_3, 0);
             break; 
     	case 1:
             gpio_pin_set_dt(&led_0, 0);
@@ -148,7 +163,13 @@ void statechart_changeLed(Statechart* handle, const sc_integer id) {
     	case 3:
             gpio_pin_set_dt(&led_0, 1);
             gpio_pin_set_dt(&led_1, 1);
-            break;       
+            break;     
+		case 4:
+			gpio_pin_set_dt(&led_2, 1);
+			break;
+		case 5:
+			gpio_pin_set_dt(&led_3, 1);
+			break;
         default:
             break;
     }
