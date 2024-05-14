@@ -199,6 +199,23 @@ int main(void)
  * Implementation of external functions called by the StateMachine
  * ********************************************************************/
 
+/** @brief Function that changes the LEDs
+ *
+ * This function is the implementation of the operation changeLed() defined in the SM.
+ * We receive the id that is either the product we have selected or the state we are,
+ * this state can be either 4 if we expelled the product or 5 if we expelled the change.
+ * It is 1..3 if we want to change the sellected product.
+ * If the id is 4 or 5 it does not change the option LED's. But sending id=0(choice to
+ * retrieve change) will also turn of the changes in the LED's made by id=4 or id=5 (turn of
+ * LED3 and LED4)
+ *
+ * @author Diogo Lapa
+ * @param[in] handle Is the pointer to the state chart of the SM
+ * @param[in] id Is the identifier of the choice/state whose message we want to send
+ *
+ * @date 14-05-2024
+ *
+ */
 void statechart_changeLed(Statechart* handle, const sc_integer id) {
     switch (id) {
         case 0:
@@ -230,6 +247,18 @@ void statechart_changeLed(Statechart* handle, const sc_integer id) {
     }
 }
 
+/** @brief Function that shows the message of the state in the terminal
+ *
+ * This function is the implementation of the operation showState() defined in the SM.
+ * We receive an id associated with each state and send the message associated with that state
+ *
+ * @author Diogo Lapa
+ * @param[in] handle Is the pointer to the state chart of the SM
+ * @param[in] id Is the identifier of the state whose message we want to send
+ *
+ * @date 14-05-2024
+ *
+ */
 void statechart_showState(Statechart* handle, const sc_integer state) {
 	printf("\e[1;1H\e[2J"); // Clear terminal
 	switch (state) {
